@@ -13,9 +13,8 @@ const userList = [
   },
 ];
 
-router.get("/logout", (req, res) => {
-  req.session.username = "";
-  res.end();
+router.get("/login", (req, res) => {
+  res.json({ username: req.session.username });
 });
 
 router.post("/login", (req, res) => {
@@ -30,6 +29,11 @@ router.post("/login", (req, res) => {
   } else {
     res.status(401).json({ msg: "Wrong login" });
   }
+});
+
+router.get("/logout", (req, res) => {
+  req.session.username = "";
+  res.end();
 });
 
 router.post("/register", (req, res) => {
