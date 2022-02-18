@@ -1,20 +1,16 @@
 const express = require("express");
 const router = express.Router();
 
-router.get("/list", (req, res) => {
-  const randomString = () => Math.random().toString(36).substring(2);
+const fs = require("fs");
+const path = require("path");
 
-  res.json({
-    listDir: [
-      { name: randomString(), path: "" },
-      { name: randomString(), path: "" },
-    ],
-    listFile: [
-      { name: randomString(), path: "" },
-      { name: randomString(), path: "" },
-      { name: randomString(), path: "" },
-    ],
-  });
+router.get("/list", (req, res) => {
+  const folderPath = path.join(__dirname, "../../space", req.session.username);
+
+  const list = fs.readdirSync(folderPath, { withFileTypes: true });
+  const listFile = list.filter((l) => l.isFile());
+  const listDir = list.filter((l) => l.isDirectory());
+  res.json({ listDir, listFile });
 });
 
 module.exports = router;
