@@ -11,7 +11,9 @@ var app = express();
 app.use(
   session({
     secret: "keyboard cat",
-    cookie: {},
+    resave: false,
+    saveUninitialized: true,
+    cookie: { secure: true },
   })
 );
 
