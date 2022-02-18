@@ -1,4 +1,5 @@
 const express = require("express");
+const req = require("express/lib/request");
 const router = express.Router();
 
 const userList = [
@@ -11,6 +12,11 @@ const userList = [
     password: "123",
   },
 ];
+
+router.get("/logout", (req, res) => {
+  req.session.username = "";
+  res.end();
+});
 
 router.post("/login", (req, res) => {
   if (
