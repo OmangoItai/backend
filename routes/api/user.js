@@ -38,9 +38,9 @@ router.get("/logout", (req, res) => {
 
 router.post("/register", (req, res) => {
   if (userList.filter((user) => user.username == req.body.username).length) {
-    userList.push({ username: req.body.username, password: req.body.password });
     res.json({ msg: "User already exist" });
   } else {
+    userList.push({ username: req.body.username, password: req.body.password });
     res.json({ msg: "Reg success" });
   }
 });
