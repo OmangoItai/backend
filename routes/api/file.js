@@ -2,15 +2,17 @@ const express = require("express");
 const router = express.Router();
 
 router.get("/list", (req, res) => {
+  const randomString = () => Math.random().toString(36).substring(2);
+
   res.json({
     listDir: [
-      { name: "Fuckme video", path: "" },
-      { name: "animals", path: "" },
+      { name: randomString(), path: "" },
+      { name: randomString(), path: "" },
     ],
     listFile: [
-      { name: "f", path: "" },
-      { name: "u", path: "" },
-      { name: "3", path: "" },
+      { name: randomString(), path: "" },
+      { name: randomString(), path: "" },
+      { name: randomString(), path: "" },
     ],
   });
 });
