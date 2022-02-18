@@ -5,7 +5,7 @@ router.use("/user", require("./user"));
 
 router.use((req, res, next) => {
   if (req.session.username) next();
-  res.redirect("/login");
+  else res.redirect("/login");
 });
 
 router.use("/file", require("./file"));

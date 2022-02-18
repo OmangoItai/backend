@@ -20,7 +20,7 @@ router.post("/login", (req, res) => {
     ).length
   ) {
     req.session.username = req.body.username;
-    res.redirect("/");
+    res.redirect("/space");
   } else {
     res.status(401).json({ msg: "Wrong login" });
   }
