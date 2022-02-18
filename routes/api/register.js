@@ -1,20 +1,23 @@
-const express = require('express');
-const session = require('express-session')
+const express = require("express");
 const router = express.Router();
-const { createProxyMiddleware } = require('http-proxy-middleware');
 
-router.use('*', createProxyMiddleware({
-    target: process.env.PROXY,
-    changeOrigin: true,
-}))
+const userList = [
+  {
+    username: "Snowsore",
+    password: "123",
+  },
+  {
+    username: "Rend",
+    password: "123",
+  },
+];
 
-router.get('/', (req,res) => {
-    // smth on database
-    if(){
-       res.send({}) 
-    }else{
-        res.send({})
-    }
-})
+router.post("/", (req, res) => {
+  if (userList.filter((user) => user.username == req.body.username).length) {
+    res.send({ msg: "User already exist" });
+  } else {
+    res.send({ msg: "Reg success" });
+  }
+});
 
 module.exports = router;
