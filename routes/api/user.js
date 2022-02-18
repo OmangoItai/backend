@@ -12,11 +12,25 @@ const userList = [
   },
 ];
 
+router.get("/login", (req, res) => {
+  if (
+    userList.filter(
+      (user) =>
+        user.username == req.body.username && user.password == req.body.password
+    ).length
+  ) {
+    req.session.username = req.body.username;
+    res.redirect("/");
+  } else {
+    res.status(401).json({ msg: "Wrong login" });
+  }
+});
+
 router.post("/register", (req, res) => {
   if (userList.filter((user) => user.username == req.body.username).length) {
-    res.send({ msg: "User already exist" });
+    res.json({ msg: "User already exist" });
   } else {
-    res.send({ msg: "Reg success" });
+    res.json({ msg: "Reg success" });
   }
 });
 
