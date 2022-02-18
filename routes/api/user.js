@@ -12,7 +12,7 @@ const userList = [
   },
 ];
 
-router.get("/login", (req, res) => {
+router.post("/login", (req, res) => {
   if (
     userList.filter(
       (user) =>
@@ -28,6 +28,7 @@ router.get("/login", (req, res) => {
 
 router.post("/register", (req, res) => {
   if (userList.filter((user) => user.username == req.body.username).length) {
+    userList.push({ username: req.body.username, password: req.body.password });
     res.json({ msg: "User already exist" });
   } else {
     res.json({ msg: "Reg success" });
