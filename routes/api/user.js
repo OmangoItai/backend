@@ -12,7 +12,7 @@ const userList = [
   },
 ];
 
-router.post("/", (req, res) => {
+router.post("/register", (req, res) => {
   if (userList.filter((user) => user.username == req.body.username).length) {
     res.send({ msg: "User already exist" });
   } else {
