@@ -1,6 +1,7 @@
-var express = require('express');
+var express = require("express");
 var router = express.Router();
 
-router.use('/api', require('./api'))
+/* GET home page. */
+router.use("/api", require("./api"));
 
 module.exports = router;
