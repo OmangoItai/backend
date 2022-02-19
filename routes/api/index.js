@@ -1,17 +1,13 @@
-var express = require('express');
+var express = require("express");
 var router = express.Router();
 
-const { createProxyMiddleware } = require('http-proxy-middleware');
+router.use("/user", require("./user"));
 
-router.get('/', (req, res) => {
-    res.json({
-        msg: 'Welcome to TinyTeam backend API server'
-    })
-})
+router.use((req, res, next) => {
+  if (req.session.username) next();
+  else res.redirect("/login");
+});
 
-router.use('/changedir', require('changedir.js'))
-router.use('/register', require('register.js'))
-router.use('/login', require('login.js'))
-router.use('/logout', require('logout.js'))
+router.use("/file", require("./file"));
 
 module.exports = router;
