@@ -1,0 +1,12 @@
+{
+  {
+    "username": "Snowsore",
+    "password": "123",
+    "authority": "guest",
+  },
+  {
+    "username": "Rend",
+    "password": "123",
+    "authority": "root",
+  },
+}

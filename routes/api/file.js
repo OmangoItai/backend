@@ -11,6 +11,7 @@ router.get("/list", (req, res) => {
     .readdirSync(folderPath, { withFileTypes: true })
     .map((l) => (l.isDirectory() ? { ...l, name: l.name + "/" } : l));
   res.json(list);
+  console.log(res)
 });
 
 module.exports = router;

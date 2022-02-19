@@ -2,16 +2,7 @@ const express = require("express");
 const req = require("express/lib/request");
 const router = express.Router();
 
-const userList = [
-  {
-    username: "Snowsore",
-    password: "123",
-  },
-  {
-    username: "Rend",
-    password: "123",
-  },
-];
+const userList = fs.readFileSync('../../account/UserList.json.json')
 
 router.get("/login", (req, res) => {
   res.json({ username: req.session.username });
@@ -22,12 +13,17 @@ router.post("/login", (req, res) => {
     userList.filter(
       (user) =>
         user.username == req.body.username && user.password == req.body.password
-    ).length
+    ).length == 1
   ) {
     req.session.username = req.body.username;
     res.redirect("/space");
   } else {
-    res.status(401).json({ msg: "Wrong login" });
+    if(userList.filter(
+        (user) => user.username == req.body.username).length == 0
+    )
+      res.status(401).json({ msg: "User is not exist." });
+    else
+      res.status(401).json({msg: "Wrong password."})
   }
 });
 
