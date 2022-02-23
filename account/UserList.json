@@ -1,12 +1,1 @@
-{
-  {
-    "username": "Snowsore",
-    "password": "123",
-    "authority": "guest",
-  },
-  {
-    "username": "Rend",
-    "password": "123",
-    "authority": "root",
-  },
-}
+{"data":[{"username":"Snowsore","password":"123","authority":"member"},{"username":"Rend","password":"123","authority":"leader"},{"username":"a","password":"a","authority":"member"}]}

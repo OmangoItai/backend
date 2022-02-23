@@ -27,7 +27,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 app.use(express.static(path.join(__dirname, "../frontend/dist")));
-
+app.use('/space',express.static('space'));
 app.use("/api", require("./routes/api"));
 
 // catch 404 and forward to error handler
