@@ -24,18 +24,29 @@ function getAllFile(dir) {
 
 router.get("/list", (req, res) => {
   const folderPath = path.join(__dirname, "../../", req.query.dir);
-  const list = fs
+  const list = {}
+  list['dir'] = fs
     .readdirSync(folderPath, { withFileTypes: true })
-    .map((l) => (l.isDirectory() ? { ...l, name: l.name + "/" } : l));
+    .filter((l) => (l.isDirectory()) );
+  list['file'] = fs
+      .readdirSync(folderPath, { withFileTypes: true })
+      .filter((l) => (l.isFile()) );
   res.json(list);
 });
 
 router.post("/download", (req, res) => {
-  const list = req.body.downloadlist;
-  for (file in list["file"]) res.download(path.join(spacePath, file));
-  // for(dir in list["dir"])
-  //   for(file in getAllFile(dir))
-  //     res.download
+  const biaspath = req.body.path
+  const filelist = req.body.filelist
+  const dirlist = req.body.dirlist
+  filelist.forEach(f => {
+    res.set({
+      'Content-Type': 'application/octet-stream',
+      'Content-Disposition': 'attachment; filename=' + f,
+      'responseType': 'arraybuffer',
+    })
+    console.log(path.join(spacePath,biaspath.substring(7,biaspath.length),f))
+    res.download(path.join(spacePath,biaspath.substring(7,biaspath.length),f))
+  })
 });
 
 module.exports = router;
