@@ -34,7 +34,7 @@ router.get("/list", (req, res) => {
   res.json(list);
 });
 
-router.post("/download", (req, res) => {
+router.get("/download", (req, res) => {
   const biaspath = req.body.path
   const filelist = req.body.filelist
   const dirlist = req.body.dirlist
@@ -45,7 +45,11 @@ router.post("/download", (req, res) => {
       'responseType': 'arraybuffer',
     })
     console.log(path.join(spacePath,biaspath.substring(7,biaspath.length),f))
-    res.download(path.join(spacePath,biaspath.substring(7,biaspath.length),f))
+    res.download(path.join(spacePath,biaspath.substring(7,biaspath.length),f), f, (e) => {})
+    if(e)
+      console.log("寄了呢")
+    else
+      console.log("好了呢")
   })
 });
 
