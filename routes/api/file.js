@@ -34,23 +34,6 @@ router.get("/list", (req, res) => {
   res.json(list);
 });
 
-router.get("/download", (req, res) => {
-  const biaspath = req.body.path
-  const filelist = req.body.filelist
-  const dirlist = req.body.dirlist
-  filelist.forEach(f => {
-    res.set({
-      'Content-Type': 'application/octet-stream',
-      'Content-Disposition': 'attachment; filename=' + f,
-      'responseType': 'arraybuffer',
-    })
-    console.log(path.join(spacePath,biaspath.substring(7,biaspath.length),f))
-    res.download(path.join(spacePath,biaspath.substring(7,biaspath.length),f), f, (e) => {})
-    if(e)
-      console.log("寄了呢")
-    else
-      console.log("好了呢")
-  })
-});
+
 
 module.exports = router;

@@ -17,6 +17,11 @@ app.use(
   })
 );
 
+app.use((req, res, next) => {
+    console.log(req.path)
+    next()
+})
+
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "jade");
@@ -27,7 +32,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 app.use(express.static(path.join(__dirname, "../frontend/dist")));
-app.use('/space',express.static('space'));
+app.use("/download",express.static(path.join(__dirname, "space")));
 app.use("/api", require("./routes/api"));
 
 // catch 404 and forward to error handler
