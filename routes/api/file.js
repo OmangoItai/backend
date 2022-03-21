@@ -3,7 +3,8 @@ const router = express.Router();
 
 const fs = require("fs");
 const path = require("path");
-let spacePath = path.join(__dirname, "../../space/");
+
+let spacePath = path.join(__dirname, "../../disk/");
 
 function getAllFile(dir) {
   var list = { dir: {} };
@@ -24,16 +25,14 @@ function getAllFile(dir) {
 
 router.get("/list", (req, res) => {
   const folderPath = path.join(__dirname, "../../", req.query.dir);
-  const list = {}
-  list['dir'] = fs
+  const list = {};
+  list["dir"] = fs
     .readdirSync(folderPath, { withFileTypes: true })
-    .filter((l) => (l.isDirectory()) );
-  list['file'] = fs
-      .readdirSync(folderPath, { withFileTypes: true })
-      .filter((l) => (l.isFile()) );
+    .filter((l) => l.isDirectory());
+  list["file"] = fs
+    .readdirSync(folderPath, { withFileTypes: true })
+    .filter((l) => l.isFile());
   res.json(list);
 });
-
-
 
 module.exports = router;
