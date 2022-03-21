@@ -4,7 +4,7 @@ const router = express.Router();
 const fs = require("fs");
 const path = require("path");
 
-let spacePath = path.join(__dirname, "../../space/");
+let spacePath = path.join(__dirname, "../../disk/");
 
 function getAllFile(dir) {
   var list = { dir: {} };

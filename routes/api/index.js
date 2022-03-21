@@ -9,5 +9,7 @@ router.use("/user", require("./user"));
 // });
 
 router.use("/file", require("./file"));
+router.use("/download", require("./download"));
+router.use("/upload", require("./upload"));
 
 module.exports = router;
