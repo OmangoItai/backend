@@ -24,6 +24,12 @@ function getAllFile(dir) {
 }
 
 router.get("/list", (req, res) => {
+  if (req.session.username == ""){
+    res.redirect("/login");
+    res.redirected = true;
+    return ;
+  }
+    
   const folderPath = path.join(__dirname, "../../", req.query.dir);
   const list = {};
   list["dir"] = fs
